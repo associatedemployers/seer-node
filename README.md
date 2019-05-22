@@ -18,6 +18,7 @@ const seer = require('seer-checks')
 let myApp = seer(new Koa(), {
   framework: 'koa',
   statusUrl: '/api/v1/__status__', // optional
+  debounce: 30000, // debounce checks
   checks: [{
     name: 'some-ping',
     retries: 5, // number of retries allowed
@@ -36,7 +37,8 @@ const seer = require('seer-checks')
 
 let myApp = seer(Express(), {
   framework: 'express',
-  statusUrl: '/api/v1/__status__', // optional
+  statusUrl: '/api/__status__', // optional
+  debounce: 30000, // debounce checks
   checks: [{
     name: 'some-ping',
     retries: 5, // number of retries allowed
@@ -50,12 +52,13 @@ let myApp = seer(Express(), {
 
 ### Retrieving a status
 
-`GET https://whatever-my-api-is.com/api/v1/__status__/` will return a JSON object. If no checks are passed to the plugin, you get a heartbeat check by default.
+`GET https://whatever-my-api-is.com/api/__status__/` will return a JSON object. If no checks are passed to the plugin, you get a heartbeat check by default.
 
 ```json
 {
   "status": "ok",
-  "healthy": true
+  "healthy": true,
+  "seer-version": "0.0.1"
 }
 ```
 
@@ -64,6 +67,7 @@ If checks have been passed to the plugin, the object will look like:
 {
   "status": "ok",
   "healthy": true,
+  "seer-version": "0.0.1",
   "checks": {
     "my-check-name": {
       "healthy": false,
