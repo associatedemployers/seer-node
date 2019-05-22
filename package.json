@@ -1,11 +1,11 @@
 {
-  "name": "seer-node",
+  "name": "seer-checks",
   "version": "0.0.1",
   "description": "Automatic routing and health checks for the seer platform",
   "main": "index.js",
   "repository": "https://github.com/associatedemployers/seer-node.git",
   "author": "James <james@aehr.org>",
-  "license": "MIT",
+  "license": "Copyright",
   "scripts": {
     "test": "npx ava **/*.test.js"
   },
