@@ -1,6 +1,6 @@
 {
   "name": "seer-checks",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Automatic routing and health checks for the seer platform",
   "main": "index.js",
   "repository": "https://github.com/associatedemployers/seer-node.git",

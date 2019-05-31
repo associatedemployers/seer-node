@@ -50,6 +50,30 @@ let myApp = seer(Express(), {
 })
 ```
 
+Barebones - You can get all the power of retries, debouncing, caching, etc. without using routing.
+```javascript
+...
+const seer = require('seer-checks')
+
+let runChecks = seer(null, {
+  framework: 'barebones',
+  debounce: 30000, // debounce checks
+  checks: [{
+    name: 'some-ping',
+    retries: 5, // number of retries allowed
+    check: async () => {
+      await someCheck();
+      // return or throw an error
+    }
+  }]
+})
+
+someApplicationRouter.get('whatevermystatus/url/is', function*() {
+  let result = yield runChecks()
+  // do something with the request
+})
+```
+
 ### Retrieving a status
 
 `GET https://whatever-my-api-is.com/api/__status__/` will return a JSON object. If no checks are passed to the plugin, you get a heartbeat check by default.
